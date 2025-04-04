@@ -35,6 +35,8 @@ struct AMTreeLazy : public IncrementalMST {
     global_ts = ts;
 #endif  // PERSISTENT
 
+    UpwardMaintain(u);
+    UpwardMaintain(v);
     if constexpr (mode == AMTreeMode::Perch) {
       LinkByPerch(w, u, v);
     } else {
@@ -45,8 +47,6 @@ struct AMTreeLazy : public IncrementalMST {
   void LinkByPerch(int ts, int u, int v) {
     if (u == v) return;
 
-    UpwardMaintain(u);
-    UpwardMaintain(v);
     Reroot(v, -1);
     Reroot(u, v);
     assert(p[u] == -1 || p[u] == v);
@@ -128,15 +128,6 @@ struct AMTreeLazy : public IncrementalMST {
         y = p[y];
       }
     }
-
-    if (s[u] > s[v]) std::swap(u, v);
-    for (int x = u; x != -1; x = p[x]) {
-      while (p[x] != -1) {
-        int y = p[x];
-        if (s[x] * alpha <= s[y]) break;
-        Rotate(x, y);
-      }
-    }
   }
 
 #ifdef PERSISTENT
@@ -145,6 +136,8 @@ struct AMTreeLazy : public IncrementalMST {
   std::optional<int> PathMax(int u, int v) {
 #endif  // PERSISTENT
     if (u == v) return std::nullopt;
+    UpwardMaintain(u);
+    UpwardMaintain(v);
     static std::vector<std::pair<int, int>> a, b;
     a.clear(), b.clear();
     for (int x = u; x != -1;) {

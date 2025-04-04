@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
         ok = false;
       }
     }
-    cout << "\nok: " << (ok ? "true" : "false") << endl;
+    cout << "\nResults good: " << (ok ? "true" : "false") << '\n' << endl;
   }
 
   return 0;
