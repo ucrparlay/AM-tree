@@ -7,13 +7,14 @@
 #include <vector>
 
 #include "am_tree_lazy.h"
+#include "am_tree_strict.h"
 #include "incremental_mst.h"
 
 using namespace std;
 
 const int test_n = 1000;
 const int test_m = 10000;
-const int test_q = 1000;
+const int test_q = 10000;
 
 template <typename T = int>
 struct Dsu {
@@ -127,6 +128,8 @@ int main(int argc, char** argv) {
 
   vector<IncrementalMST*> solvers = {
       new BruteForceIncrementalMST(n),
+      new AMTreeStrict<AMTreeMode::Perch>(n),
+      new AMTreeStrict<AMTreeMode::Stitch>(n),
       new AMTreeLazy<AMTreeMode::Perch>(n),
       new AMTreeLazy<AMTreeMode::Stitch>(n),
   };
