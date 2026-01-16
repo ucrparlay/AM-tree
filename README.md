@@ -1,6 +1,6 @@
 ## The Anti-Monopoly Tree (AM-tree)
 
-The **Anti-Monopoly Tree (AM-tree)** is an efficient data structure to maintain **incremental minimum spanning trees**. It supports the following operations in $O(\log n)$ amortized time:
+The **Anti-Monopoly Tree (AM-tree)** is an efficient data structure to maintain **incremental minimum spanning trees (Incremental MST)**. It supports the following operations in $O(\log n)$ amortized time:
 - `void Insert(int u, int v, int w)`
 - `std::optional<int> PathMax(int u, int v)`
 
